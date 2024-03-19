@@ -1,5 +1,6 @@
 mod ray;
 mod vec3;
+mod hittable;
 
 use crate::vec3::{Point3, Vec3};
 use ray::Ray;
