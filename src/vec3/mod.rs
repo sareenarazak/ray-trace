@@ -45,6 +45,10 @@ impl Vec3 {
         self.dot(self).sqrt()
     }
 
+    pub fn length_squared(self) -> f64 {
+        self.dot(self)
+    }
+
     pub fn unit_vector(self) -> Vec3 {
         self / self.length()
     }

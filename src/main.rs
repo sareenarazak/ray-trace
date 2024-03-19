@@ -7,6 +7,7 @@ use std::fs::File;
 use std::io::{self, Result, Write};
 use vec3::Color;
 
+
 fn ray_color(ray: &Ray) -> Color {
     let t = hit_sphere(Point3::new(0.0, 0.0, -1.0), 0.5, ray);
     if t > 0.0  {
@@ -21,14 +22,14 @@ fn ray_color(ray: &Ray) -> Color {
 
 fn hit_sphere(center: Point3, radius: f64, ray: &Ray) -> f64{
     let oc: Vec3 = ray.origin() - center;
-    let a = ray.direction().dot(ray.direction());
-    let b = 2.0 * (oc.dot(ray.direction()));
-    let c = oc.dot(oc) - radius * radius;
-    let discriminant = b * b  - (4.0 * a * c);
+    let a = ray.direction().length_squared();
+    let half_b = oc.dot(ray.direction());
+    let c = oc.length_squared() - (radius * radius);
+    let discriminant = (half_b * half_b)  - (a * c);
     if discriminant < 0.0 {
         -1.0
     } else {
-        (-b - f64::sqrt(discriminant)) /  2.0 * a
+        (-half_b - f64::sqrt(discriminant)) / a
     }
 }
 
